@@ -413,6 +413,7 @@ class deliverSmThrower(Thrower):
                     if deliverer is None:
                         raise NoDelivererForSystemId(dc.cid)
 
+                    self.log.info("PDU: %s" % pdu)
                     yield deliverer.sendRequest(pdu, deliverer.config().responseTimerSecs)
                 else:
                     r = yield self.smpps.deliverer_send_request(dc.cid, pdu)
