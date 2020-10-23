@@ -400,7 +400,7 @@ class deliverSmThrower(Thrower):
                 else:
                     bound_systemdids = yield self.smpps.list_bound_systemids()
 
-                self.log.info('Bound SMPPSes: %s', str(bound_systemdids))
+                self.log.debug('Bound SMPPSes: %s', str(bound_systemdids))
 
                 dc.cid = ("%s" % dc.cid)
                 if not bound_systemdids.has_key(dc.cid):
@@ -413,7 +413,7 @@ class deliverSmThrower(Thrower):
                     if deliverer is None:
                         raise NoDelivererForSystemId(dc.cid)
 
-                    self.log.info("PDU: %s" % pdu)
+                    self.log.debug("PDU: %s" % pdu)
                     yield deliverer.sendRequest(pdu, deliverer.config().responseTimerSecs)
                 else:
                     r = yield self.smpps.deliverer_send_request(dc.cid, pdu)
