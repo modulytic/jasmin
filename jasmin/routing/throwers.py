@@ -419,8 +419,8 @@ class deliverSmThrower(Thrower):
                     if not r:
                         raise DeliveringFailed('Delivering failed, check %s smpps logs for more details' % dc.cid)
             except Exception as e:
-                self.log.error('Throwing SMPP/DELIVER_SM [msgid:%s] to (%s %s/%s)[cid:%s], %s: %s.',
-                               msgid, route_type, counter, len(dcs), dc.cid, type(e), e)
+                self.log.error('Throwing SMPP/DELIVER_SM [msgid:%s] to (%s %s/%s)[cid:%s]:\n%s.',
+                               msgid, route_type, counter, len(dcs), dc.cid, traceback.format_exc())
 
                 # List of exceptions after which, no further retrying shall be made
                 noRetryExceptions = [SmppsNotSetError]
