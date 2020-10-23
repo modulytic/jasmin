@@ -400,7 +400,8 @@ class deliverSmThrower(Thrower):
 
                 self.log.info('Bound SMPPSes: %s', str(bound_systemdids))
 
-                if dc.cid not in bound_systemdids:
+                dc.cid = str(dc.cid)
+                if not bound_systemdids.has_key(dc.cid):
                     raise SystemIdNotBound(dc.cid)
 
                 # Pick a deliverer and sendRequest
