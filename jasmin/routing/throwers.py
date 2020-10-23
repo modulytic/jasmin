@@ -398,6 +398,8 @@ class deliverSmThrower(Thrower):
                 else:
                     bound_systemdids = yield self.smpps.list_bound_systemids()
 
+                self.log.info('Bound SMPPSes: %s', str(bound_systemdids))
+
                 if dc.cid not in bound_systemdids:
                     raise SystemIdNotBound(dc.cid)
 
