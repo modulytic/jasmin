@@ -364,9 +364,9 @@ class deliverSmThrower(Thrower):
     def smpp_deliver_sm_callback(self, message):
         msgid = message.content.properties['message-id']
         route_type = message.content.properties['headers']['route-type']
-        dcs = pickle.loads(message.content.properties['headers']['dst-connectors'])
-        pdu = pickle.loads(message.content.body)
-        RoutedDeliverSmContent = pickle.loads(message.content.body)
+        dcs = pickle.loads(str(message.content.properties['headers']['dst-connectors']))
+        pdu = pickle.loads(str(message.content.body))
+        RoutedDeliverSmContent = pickle.loads(str(message.content.body))
         self.log.debug('Got one message (msgid:%s) to throw: %s', msgid, RoutedDeliverSmContent)
 
         # If any, clear requeuing timer
