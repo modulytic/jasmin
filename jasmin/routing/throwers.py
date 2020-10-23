@@ -5,6 +5,8 @@ import logging
 import urllib
 from logging.handlers import TimedRotatingFileHandler
 
+import traceback
+
 from twisted.application.service import Service
 from twisted.internet import defer
 from twisted.internet import reactor
@@ -316,8 +318,8 @@ class deliverSmThrower(Thrower):
                     raise MessageAcknowledgementError(
                         'Destination end did not acknowledge receipt of the message.')
             except Exception as e:
-                self.log.error('Throwing message [msgid:%s] to (%s %s/%s)[cid:%s] (%s), %s: %s.',
-                               msgid, route_type, counter, len(dcs), dc.cid, dc.baseurl, type(e), e)
+                self.log.error('Throwing message [msgid:%s] to (%s %s/%s)[cid:%s] (%s):\n%s.',
+                               msgid, route_type, counter, len(dcs), dc.cid, dc.baseurl, traceback.format_exc())
 
                 # List of errors after which, no further retrying shall be made
                 noRetryErrors = ['404 Not Found']
